@@ -1,0 +1,149 @@
+\documentclass[11pt]{report}
+
+\usepackage{natbib}
+
+\usepackage[T1]{fontenc}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[oldcommands,ruled]{algorithm2e}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+%%Plantilla de tesis de Licenciatura o Maehttps://www.overleaf.com/project/600061dfd940e514c3d936f4stría. 
+
+%% Various layout settings: may require adjustment
+
+\makeatletter
+%page layout
+\@twosidefalse
+% distance from top of page to page's head
+\topmargin -0.35in      % head margin = .75in or 2cm
+% distance between the left side and text left margin
+\oddsidemargin 0.5in    % binding margin = 1.5in or 4cm
+
+\headheight 20pt 
+\headsep 15pt
+%\footheight 48pt    % this line doesn't work in latex2e
+\footskip 28pt
+\textheight 9.05in
+\textwidth 5.68in
+\parskip 8pt
+\parindent 10pt
+\columnwidth \textwidth 
+\footnotesep 12pt
+
+%floats and marginpar
+\floatsep 12pt plus 2pt minus 2pt
+\textfloatsep  20pt plus 2pt minus 4pt
+\intextsep 12pt plus 2pt minus 2pt
+\dblfloatsep 12pt plus 2pt minus 2pt
+\dbltextfloatsep 20pt plus 2pt minus 4pt
+%\@maxsep 20pt     % this line doesn't work in latex2e
+%\@dblmaxsep 20pt  % this line doesn't work in latex2e
+\@fptop 0pt plus 1fil
+\@fpsep 8pt plus 2fil
+\@fpbot 0pt plus 1fil
+\@dblfptop 0pt plus 1fil
+\@dblfpsep 8pt plus 2fil
+\@dblfpbot 0pt plus 1fil
+\marginparwidth 90pt 
+\marginparsep 11pt
+\marginparpush 5pt
+\makeatother
+
+%% End of layout settings.
+
+% Following modified from article.doc to put a little indentation between
+% the footnote marker and the text of the footnote
+% The change is the explicit blank just before the second $ sign
+% This can be removed if you prefer ugly footnotes.
+
+\makeatletter
+\long\def\@makefntext#1{\@setpar{\@@par\@tempdima \hsihttps://www.overleaf.com/project/600061dfd940e514c3d936f4ze 
+  \advance\@tempdima-10pt\parshape \@ne 10pt \@tempdima}\par
+  \parindent 1em\noindent \hbox to \z@{\hss$^{\@thefnmark}\ $}#1}
+\makeatother
+
+% Some commands to handle linespacing
+
+\newlength{\spacing}
+\setlength{\spacing}{\baselineskip}
+
+\newcommand{\blk}[1]{\mathbf{#1}}
+
+\newcommand{\nspace}[1]{\setlength{\baselineskip}{#1\spacing}}
+\newenvironment{linespacing}[1]{\nspace{#1}}{}
+
+
+%Some misc. Commands:
+
+% Input the postscript function (required for the crest).
+\input epsf
+\newcommand{\ew}[2]{\setlength{\epsfxsize}{#2}\epsfbox{#1}}
+
+\begin{document}
+
+   %\bibliographystyle{apalikesp}              % Style for Bibliography
+    \bibliographystyle{plainnat}
+   \pagestyle{empty}                       % Input title page
+   \input{titulo.tex}
+   \newpage
+
+   \pagenumbering{roman}                   % Input abstract
+   \pagestyle{plain}
+   \setcounter{page}{2}
+   \begin{center} {\Large {\bf Resumen}} \end{center}
+   \input{resumen.tex}
+   \addcontentsline{toc}{chapter}{Resumen}
+   \newpage
+
+   \input{agradecimientos.tex}                 % Input acknowledgements
+   \addcontentsline{toc}{chapter}{Agradecimientos}
+   \newpage
+
+   \input{declaracion.tex}                 % Input declaration
+   \addcontentsline{toc}{chapter}{Declaracion}
+   \newpage
+
+   \tableofcontents                        % Create table of contents
+   \listoffigures                          % and list of figures
+   \addcontentsline{toc}{chapter}{Lista de Figuras}
+   \newpage
+   \listoftables
+   \addcontentsline{toc}{chapter}{Lista de Cuadros}
+   \newpage
+
+   \pagenumbering{arabic}                  % Setup for main text.
+   \pagestyle{headings}
+   \setcounter{page}{1}
+
+        \begin{linespacing}{1.5}           % Linespacing for the main text
+                                           % of the thesis.
+
+        \input{Capitulo1}                 % Input your various chapters.
+        \input{Capitulo2}
+        \input{Capitulo3}
+        \input{Capitulo4}
+        \input{Capitulo5}
+        \input{Capitulo6}
+
+        \end{linespacing}
+
+   \newpage                                % Bibliography setup:
+   \begin{linespacing}{1.0}                % Single-spaced
+   \addcontentsline{toc}{chapter}{Referencias}
+   \bibliography{biblio}             % Your bibliography
+
+   \newpage                                % Appendix setup:
+   \appendix    
+        \input{ApendiceA}                  % Input your appendices.
+        \newpage
+
+   \end{linespacing}
+\end{document}
+
